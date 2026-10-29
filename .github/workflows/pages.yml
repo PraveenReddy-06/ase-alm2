@@ -20,6 +20,18 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: Validate embedded JavaScript syntax
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import re
+          html = open("index.html", encoding="utf-8").read()
+          scripts = re.findall(r"<script>(.*?)</script>", html, re.S)
+          if len(scripts) != 1:
+              raise SystemExit(f"Expected one embedded script, found {len(scripts)}")
+          open("/tmp/projectflow.js", "w", encoding="utf-8").write(scripts[0])
+          PY
+          node --check /tmp/projectflow.js
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
