@@ -1,48 +1,54 @@
-# ProjectFlow — Basic Application Lifecycle Management System
+# CivicFlow — Smart Drainage & Water Supply Reporting System
 
-A lightweight, responsive web prototype for tracking software projects across the application lifecycle. It was created as a basic academic project for Software Process Models and Application Lifecycle Management (ALM).
+A responsive, front-end-only academic prototype where citizens can report drainage blockages, water shortages, water leakage, drain overflow, suspected contaminated water and other local civic issues. Reports can include a description, locality/address, optional browser geolocation, and optional photo evidence. A simulated authority view can prioritize reports and update status.
 
-## Live deployment
+## Live demo
 
-Expected GitHub Pages URL: **https://praveenreddy-06.github.io/ase-alm2/**
+**https://praveenreddy-06.github.io/ase-alm2/**
 
-The site is deployed through the GitHub Actions workflow in `.github/workflows/pages.yml`. The most recent verified deployment run is available at [GitHub Actions](https://github.com/PraveenReddy-06/ase-alm2/actions/runs/40867734635). Each push to `main` triggers a new static-site deployment; check the Actions tab if a future deployment fails.
+The static site is deployed using the GitHub Actions workflow at [`.github/workflows/pages.yml`](.github/workflows/pages.yml). Check the [Actions tab](https://github.com/PraveenReddy-06/ase-alm2/actions) for the latest deployment status.
 
 ## Features
 
-- **Overview dashboard:** project counts, requirement totals, task completion, test summary, project progress, and recent activity.
-- **Projects:** create and edit projects, choose a process model, set status and progress, and search/filter the list.
-- **Requirements:** add requirement IDs, descriptions, priority, and status; cycle a requirement through planned, in-progress, and completed.
-- **Task board:** organize tasks into To Do, In Progress, and Done columns; update or delete a task.
-- **Test cases:** connect a test scenario to a requirement and record expected/actual results and Pass/Fail/Pending status.
-- **Lifecycle tracker:** check off requirements, planning, design, development, testing, release, and maintenance; record a process model selection.
-- **Browser persistence:** changes are saved to `localStorage` on the current browser and device.
-- **Responsive layout:** navigation and tables adapt for smaller screens.
+- **Community dashboard:** total reports, reports awaiting action, in-progress issues, resolved issues and a type breakdown.
+- **Issue submission:** type, impact level, address/locality, detailed description and optional reporter name.
+- **Optional location:** asks browser permission to add coordinates; users can instead enter a location manually.
+- **Optional photo evidence:** preview and resize an image locally before saving it with the report.
+- **Issue tracker:** search by ID, issue type, location or description; filter by type/status.
+- **Authority demo mode:** prioritize urgent/high-severity reports and change issue status or priority.
+- **Status workflow:** Submitted → Acknowledged → In Progress → Resolved.
+- **Issue details:** show report ID, location, timestamps, status, priority, optional coordinates/map link and attached image.
+- **Browser persistence:** records are saved in the current browser profile using `localStorage`.
+- **Responsive interface:** adapts to laptop and mobile widths.
 
 ## Run locally
 
-No package installation, build tool, database, or backend is required.
+No build step, framework, database, or package installation is required.
 
-1. Download or clone this repository.
-2. Open `index.html` directly in a modern browser, or use VS Code Live Server.
-3. Add or edit projects and records in the interface.
+1. Clone or download the repository.
+2. Open `index.html` in a modern browser, or use VS Code Live Server.
+3. Create a report and test status changes. The records remain local to that browser profile.
 
 ## Technology stack
 
-- HTML5 for page structure
-- CSS3 for styling and responsive layout
-- Vanilla JavaScript for interface behaviour and record management
-- Browser `localStorage` for prototype persistence
-- Git and GitHub for version control
-- GitHub Pages and GitHub Actions for static hosting
+- HTML5
+- CSS3 with responsive layout
+- Vanilla JavaScript
+- Browser `localStorage`
+- Browser Geolocation API (permission required)
+- FileReader and Canvas APIs for local image preview/compression
+- Git/GitHub and GitHub Actions
+- GitHub Pages for static hosting
 
-## Software process model
+## Proposed software process model
 
-The prototype uses an **Incremental** approach as the primary model: a small working dashboard is delivered first, then project tracking, requirements, tasks, testing, and lifecycle tracking are added as manageable increments. This is appropriate for a small, low-risk academic prototype whose interface can be improved from feedback.
+The report selects the **Incremental Model**. The prototype can be delivered through small increments: (1) page shell and sample issue dashboard, (2) report form, validation, optional photo/location and persistence, and (3) search, filters, authority demo controls, testing and deployment. Each increment can be reviewed and refined without requiring a complete rewrite.
 
-## Scope and limitations
+## Data and privacy limitations
 
-This is an educational, front-end-only prototype. Sample records are illustrative. It does not include user accounts, server-side storage, multi-user synchronization, access control, a real database, or a backend API. Browser data is local to the same browser profile and can be lost when its site data is cleared. Test results are user-entered demonstration records, not evidence of a production QA pipeline.
+This is a classroom prototype, not an official government service. It does **not** send complaints to a municipality, dispatch field staff, verify identity, or provide emergency response. It has no server, database, authentication, authorization, cross-device synchronization, or trusted audit trail. The authority mode is a demonstration switch, not secure role-based access. All records and photos remain in the current browser profile; clearing site data can delete them. Do not submit sensitive personal information or use this demo for urgent public-safety reports.
+
+A production version would need a secure backend and database, authenticated citizen/staff roles, data retention and privacy controls, a protected evidence store, server-side validation, audit logs, abuse prevention, and integration with the responsible local authority.
 
 ## Repository structure
 
@@ -55,10 +61,6 @@ ase-alm2/
         └── pages.yml
 ```
 
-## Deployment workflow
+## Report
 
-When code is pushed to `main`, GitHub Actions uploads this repository as a static Pages artifact and deploys it. Manual runs are also available from **Actions → Deploy to GitHub Pages → Run workflow**.
-
-## Academic report
-
-The project report describes the problem, requirements, process-model comparison, ALM lifecycle, design, implementation, and test plan. Before submission, fill in the institution/course details and confirm any required team member names with the instructor.
+The DOCX project report follows the course's supplied Project Report Format for CO2, covering introduction, requirement analysis, process-model selection, ALM, design, implementation, testing and project progress evidence. Update course section, instructor and team-member details as needed. Capture real site screenshots and record manual test outcomes before submission.
