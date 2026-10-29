@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A lightweight project and application lifecycle management dashboard for student software projects.">
+<title>ProjectFlow | Software Project ALM</title>
+<style>
+:root{--ink:#182230;--muted:#637083;--line:#e5eaf0;--paper:#f5f7fb;--blue:#315fe9;--nav:#111c32;--green:#16865b;--amber:#a96508;--red:#bf3434}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.shell{display:grid;grid-template-columns:235px 1fr;min-height:100vh}.side{background:var(--nav);color:#dce4f5;padding:24px 16px}.brand{font-size:20px;font-weight:800;letter-spacing:-.5px;padding:0 12px 28px}.brand span{color:#8ba6ff}.navlabel{color:#8f9db7;font-size:11px;font-weight:700;letter-spacing:1.5px;padding:16px 12px 8px}.navbtn{width:100%;padding:11px 12px;margin:2px 0;border:0;border-radius:9px;text-align:left;background:transparent;color:#dce4f5}.navbtn:hover,.navbtn.active{background:#253655;color:#fff}.side-note{border-top:1px solid #2b3953;margin:30px 8px 0;padding-top:18px;color:#aab7cf;font-size:12px}.main{min-width:0}.topbar{height:72px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;gap:12px}.crumb{color:var(--muted);font-size:13px}.user{display:flex;align-items:center;gap:10px;font-weight:650}.avatar{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#e7ecff;color:#315fe9;font-weight:800}.content{max-width:1300px;margin:auto;padding:30px}.heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:22px}.eyebrow{text-transform:uppercase;color:var(--blue);font-weight:800;letter-spacing:1.3px;font-size:11px}.heading h1{font-size:29px;line-height:1.2;margin:5px 0 8px;letter-spacing:-.8px}.sub{color:var(--muted);margin:0}.btn{border:1px solid var(--line);background:white;border-radius:9px;padding:10px 14px;font-weight:700;color:var(--ink)}.btn.primary{color:white;background:var(--blue);border-color:var(--blue)}.btn:hover{filter:brightness(.97)}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:24px 0}.stat,.panel,.card{background:white;border:1px solid var(--line);border-radius:14px}.stat{padding:18px}.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}.stat-num{font-size:29px;font-weight:800;letter-spacing:-.8px;margin-top:10px}.stat-foot{color:var(--muted);font-size:12px;margin-top:2px}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(270px,1fr);gap:16px}.panel{padding:21px;margin-bottom:16px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.panel h2{font-size:16px;margin:0}.small{font-size:12px;color:var(--muted)}.progress-row{margin:18px 0}.progress-label{display:flex;justify-content:space-between;gap:10px;font-size:13px;margin-bottom:7px}.bar{background:#edf0f6;height:8px;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;background:var(--blue);border-radius:99px}.activity{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #eef1f5}.activity:last-child{border:0}.dot{width:9px;height:9px;border-radius:50%;background:var(--blue);margin-top:7px;flex:none}.activity b{display:block;font-size:13px}.activity p{font-size:12px;color:var(--muted);margin:3px 0}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:650px}.table th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.7px;background:#f8f9fc}.table th,.table td{padding:13px 12px;border-bottom:1px solid #edf0f5}.table td{font-size:13px}.badge{display:inline-block;border-radius:99px;padding:4px 9px;font-size:11px;font-weight:750}.badge.done{color:var(--green);background:#e6f6ee}.badge.progress{color:#315fe9;background:#e9eeff}.badge.pending{color:var(--amber);background:#fff3dd}.badge.risk{color:var(--red);background:#ffe9e9}.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.field{width:100%;padding:10px 11px;border:1px solid #dce2eb;border-radius:8px;background:white;color:var(--ink)}.filters .field{width:auto;min-width:160px}.empty{padding:28px;text-align:center;color:var(--muted)}.hidden{display:none!important}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.formfield label{display:block;font-size:12px;font-weight:750;margin-bottom:6px}.formfield.full{grid-column:1/-1}textarea.field{min-height:92px;resize:vertical}.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}.toast{position:fixed;right:22px;bottom:22px;background:#17233b;color:#fff;padding:13px 18px;border-radius:10px;box-shadow:0 10px 35px #14213a35;z-index:5;max-width:320px}.footer{color:#8390a3;font-size:11px;text-align:center;padding:8px 0 20px}
+@media(max-width:950px){.shell{grid-template-columns:190px 1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.content{padding:23px}}
+@media(max-width:650px){.shell{display:block}.side{padding:12px;display:flex;align-items:center;gap:8px;overflow:auto}.brand{padding:8px 12px;white-space:nowrap}.navlabel,.side-note{display:none}.navbtn{width:auto;white-space:nowrap;margin:0;padding:9px 12px}.topbar{height:58px;padding:0 16px}.content{padding:20px 14px}.heading{display:block}.heading .btn{margin-top:14px}.heading h1{font-size:25px}.stats{gap:9px}.stat{padding:14px}.stat-num{font-size:25px}.formgrid{grid-template-columns:1fr}.formfield.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="side">
+  <div class="brand">Project<span>Flow</span></div>
+  <div>
+    <div class="navlabel">WORKSPACE</div>
+    <button class="navbtn active" data-view="dashboard">▦ &nbsp; Overview</button>
+    <button class="navbtn" data-view="projects">▤ &nbsp; Projects</button>
+    <button class="navbtn" data-view="requirements">☷ &nbsp; Requirements</button>
+    <button class="navbtn" data-view="tasks">✓ &nbsp; Task board</button>
+    <button class="navbtn" data-view="testing">◇ &nbsp; Test cases</button>
+    <div class="navlabel">MANAGEMENT</div>
+    <button class="navbtn" data-view="lifecycle">⟳ &nbsp; Lifecycle</button>
+  </div>
+  <div class="side-note">BASIC ALM PROTOTYPE<br>Software Process Models · CO2</div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="crumb">Workspace / <strong id="crumb">Overview</strong></div><div class="user"><div class="avatar">PF</div><span>Project Team</span></div></header>
+<div class="content">
+<section id="dashboard" class="view">
+  <div class="heading"><div><div class="eyebrow">Project workspace</div><h1>Project overview</h1><p class="sub">A simple place to plan, track, and review the software lifecycle.</p></div><button class="btn primary" id="newProjectBtn">＋ New project</button></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-top">Active projects <span>▣</span></div><div class="stat-num" id="statProjects">3</div><div class="stat-foot">Tracked in this workspace</div></div>
+    <div class="stat"><div class="stat-top">Requirements <span>☷</span></div><div class="stat-num" id="statReq">8</div><div class="stat-foot">Across current projects</div></div>
+    <div class="stat"><div class="stat-top">Tasks completed <span>✓</span></div><div class="stat-num" id="statTasks">6/10</div><div class="stat-foot">Based on task status</div></div>
+    <div class="stat"><div class="stat-top">Tests passed <span>◇</span></div><div class="stat-num" id="statTests">4/5</div><div class="stat-foot">Latest test tracking</div></div>
+  </div>
+  <div class="layout">
+    <div>
+      <div class="panel"><div class="panel-head"><h2>Project progress</h2><button class="btn" data-go="projects">View projects →</button></div><div id="progressList"></div></div>
+      <div class="panel"><div class="panel-head"><h2>Recent projects</h2><span class="small">Sample workspace data</span></div><div class="tablewrap"><table class="table"><thead><tr><th>Project</th><th>Process model</th><th>Status</th><th>Progress</th></tr></thead><tbody id="recentRows"></tbody></table></div></div>
+    </div>
+    <div>
+      <div class="panel"><div class="panel-head"><h2>Recent activity</h2><span class="small">Workspace log</span></div><div id="activityList"></div></div>
+      <div class="panel"><div class="panel-head"><h2>Lifecycle checklist</h2><span class="small" id="lifeCount">3 of 7</span></div><div id="lifeMini"></div><button class="btn" data-go="lifecycle" style="width:100%;margin-top:12px">Open lifecycle →</button></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="view hidden">
+ <div class="heading"><div><div class="eyebrow">Workspace</div><h1>Projects</h1><p class="sub">Create projects and track their process model and progress.</p></div><button class="btn primary" id="newProjectBtn2">＋ New project</button></div>
+ <div class="filters"><input id="projectSearch" class="field" placeholder="Search projects…" aria-label="Search projects"><select id="projectFilter" class="field" aria-label="Filter project status"><option value="">All statuses</option><option>In Progress</option><option>Planning</option><option>Completed</option></select></div>
+ <div class="panel"><div class="tablewrap"><table class="table"><thead><tr><th>Project name</th><th>Owner</th><th>Process model</th><th>Status</th><th>Progress</th><th>Action</th></tr></thead><tbody id="projectRows"></tbody></table></div></div>
+</section>
+
+<section id="requirements" class="view hidden">
+ <div class="heading"><div><div class="eyebrow">Requirements management</div><h1>Requirements</h1><p class="sub">Record requirements with priorities, IDs, and implementation status.</p></div><button class="btn primary" id="addReqBtn">＋ Add requirement</button></div>
+ <div class="filters"><input id="reqSearch" class="field" placeholder="Search requirements…" aria-label="Search requirements"><select id="reqStatusFilter" class="field" aria-label="Filter requirement status"><option value="">All statuses</option><option>Completed</option><option>In Progress</option><option>Planned</option></select></div>
+ <div class="panel"><div class="tablewrap"><table class="table"><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Status</th><th>Action</th></tr></thead><tbody id="reqRows"></tbody></table></div></div>
+</section>
+
+<section id="tasks" class="view hidden">
+ <div class="heading"><div><div class="eyebrow">Work breakdown structure</div><h1>Task board</h1><p class="sub">Move work through planning, implementation, and completion.</p></div><button class="btn primary" id="addTaskBtn">＋ Add task</button></div>
+ <div class="layout" id="taskColumns"></div>
+</section>
+
+<section id="testing" class="view hidden">
+ <div class="heading"><div><div class="eyebrow">Quality assurance</div><h1>Test cases</h1><p class="sub">Link test scenarios to requirements and record the result.</p></div><button class="btn primary" id="addTestBtn">＋ Add test</button></div>
+ <div class="panel"><div class="tablewrap"><table class="table"><thead><tr><th>Test ID</th><th>Requirement</th><th>Scenario</th><th>Expected</th><th>Actual</th><th>Result</th><th>Action</th></tr></thead><tbody id="testRows"></tbody></table></div></div>
+</section>
+
+<section id="lifecycle" class="view hidden">
+ <div class="heading"><div><div class="eyebrow">Application lifecycle management</div><h1>Lifecycle tracker</h1><p class="sub">Follow the project from initial requirements through maintenance.</p></div><button class="btn" id="resetLifecycle">Reset checklist</button></div>
+ <div class="panel"><div class="panel-head"><h2>Lifecycle stages</h2><span class="small" id="lifecyclePercent">0% complete</span></div><div id="lifecycleList"></div></div>
+ <div class="panel"><h2>Process model selection</h2><p class="sub" style="margin:8px 0 15px">Choose the model used for the project and record a short reason. The demo starts with Incremental because it supports staged delivery of a small prototype.</p><div class="formgrid"><div class="formfield"><label for="modelSelect">Selected process model</label><select class="field" id="modelSelect"><option>Incremental</option><option>Agile</option><option>Waterfall</option><option>Prototyping</option><option>Spiral</option><option>V-Model</option></select></div><div class="formfield"><label for="modelReason">Selection reason</label><input class="field" id="modelReason" value="Build and review the prototype in small increments."></div></div><div style="margin-top:14px"><button class="btn primary" id="saveModel">Save model selection</button></div></div>
+</section>
+<div class="footer">ProjectFlow · Educational ALM prototype · Data is stored in this browser</div>
+</div>
+</main></div>
+<div id="modalHost"></div><div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<script>
+const STORE_KEY='projectflow-alm-v1';
+const seed={
+ projects:[
+  {id:1,name:'Student Project Portal',owner:'Project Team',model:'Incremental',status:'In Progress',progress:65,description:'Organize student projects, milestones, and learning outcomes.'},
+  {id:2,name:'Library Tracker',owner:'Development Team',model:'Waterfall',status:'Planning',progress:25,description:'Track books, borrowers, and lending transactions.'},
+  {id:3,name:'Campus Helpdesk',owner:'Support Team',model:'Agile',status:'Completed',progress:100,description:'Manage questions and support requests from campus users.'}
+ ],
+ requirements:[
+  {id:'FR01',name:'Create and view project records',priority:'High',status:'Completed'},
+  {id:'FR02',name:'Manage project requirements',priority:'High',status:'Completed'},
+  {id:'FR03',name:'Track task status',priority:'High',status:'In Progress'},
+  {id:'FR04',name:'Display lifecycle stages',priority:'High',status:'Completed'},
+  {id:'FR05',name:'Record test cases and results',priority:'Medium',status:'In Progress'},
+  {id:'NFR01',name:'Provide a responsive user interface',priority:'Medium',status:'Completed'},
+  {id:'NFR02',name:'Persist workspace data in browser storage',priority:'Medium',status:'Planned'},
+  {id:'NFR03',name:'Provide understandable navigation',priority:'High',status:'Completed'}
+ ],
+ tasks:[
+  {id:1,name:'Gather project requirements',project:'Student Project Portal',status:'Done',priority:'High'},
+  {id:2,name:'Plan screens and navigation',project:'Student Project Portal',status:'Done',priority:'Medium'},
+  {id:3,name:'Implement project dashboard',project:'Student Project Portal',status:'In Progress',priority:'High'},
+  {id:4,name:'Create requirement tracker',project:'Student Project Portal',status:'In Progress',priority:'High'},
+  {id:5,name:'Write test scenarios',project:'Student Project Portal',status:'To Do',priority:'Medium'},
+  {id:6,name:'Review and deploy prototype',project:'Student Project Portal',status:'To Do',priority:'High'}
+ ],
+ tests:[
+  {id:'TC01',req:'FR01',scenario:'Create a project with valid details',expected:'Project is saved',actual:'Project created',result:'Pass'},
+  {id:'TC02',req:'FR02',scenario:'View requirements list',expected:'Requirements are displayed',actual:'List displayed',result:'Pass'},
+  {id:'TC03',req:'FR03',scenario:'Update a task status',expected:'Status is updated',actual:'Updated in browser',result:'Pass'},
+  {id:'TC04',req:'FR04',scenario:'Open lifecycle tracker',expected:'Seven stages are shown',actual:'Seven stages shown',result:'Pass'},
+  {id:'TC05',req:'NFR01',scenario:'Use the app on a narrow screen',expected:'Layout adjusts to screen',actual:'Pending manual review',result:'Pending'}
+ ],
+ lifecycle:[
+  {name:'Requirements',detail:'Identify users, problems, and expected outcomes.',done:true},
+  {name:'Planning',detail:'Select a process model, tasks, and milestones.',done:true},
+  {name:'Design',detail:'Prepare the page layout and basic data structure.',done:true},
+  {name:'Development',detail:'Implement the working prototype and modules.',done:false},
+  {name:'Testing',detail:'Run functional and responsive checks.',done:false},
+  {name:'Release / Deployment',detail:'Publish the static site using GitHub Pages.',done:false},
+  {name:'Maintenance',detail:'Record defects and improve the next version.',done:false}
+ ],
+ activity:[
+  {title:'Workspace initialized',detail:'Sample projects and requirements loaded.'},
+  {title:'Lifecycle checklist added',detail:'Seven application lifecycle stages are available.'},
+  {title:'Test tracking enabled',detail:'Test scenarios can be marked Pass, Fail, or Pending.'}
+ ],
+ model:'Incremental',
+ modelReason:'Build and review the prototype in small increments.'
+};
+let data=loadData();
+function loadData(){try{const raw=localStorage.getItem(STORE_KEY);if(raw){const parsed=JSON.parse(raw);return {...structuredClone(seed),...parsed}}}catch(e){}return structuredClone(seed)}
+function save(){try{localStorage.setItem(STORE_KEY,JSON.stringify(data))}catch(e){notify('Browser storage is unavailable. Changes may not persist after refresh.')}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function badgeClass(v){if(['Done','Completed','Pass'].includes(v))return'done';if(['In Progress'].includes(v))return'progress';if(['Fail'].includes(v))return'risk';return'pending'}
+function badge(v){return '<span class="badge '+badgeClass(v)+'">'+esc(v)+'</span>'}
+function notify(message){const el=document.getElementById('toast');el.textContent=message;el.classList.remove('hidden');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.add('hidden'),2600)}
+function addActivity(title,detail){data.activity.unshift({title,detail});data.activity=data.activity.slice(0,8)}
+function nav(view){document.querySelectorAll('.view').forEach(el=>el.classList.toggle('hidden',el.id!==view));document.querySelectorAll('.navbtn').forEach(el=>el.classList.toggle('active',el.dataset.view===view));document.getElementById('crumb').textContent=({dashboard:'Overview',projects:'Projects',requirements:'Requirements',tasks:'Task board',testing:'Test cases',lifecycle:'Lifecycle'})[view]||view;render();window.scrollTo({top:0,behavior:'smooth'})}
+function render(){
+ const done=data.tasks.filter(t=>t.status==='Done').length,passed=data.tests.filter(t=>t.result==='Pass').length;
+ document.getElementById('statProjects').textContent=data.projects.length;document.getElementById('statReq').textContent=data.requirements.length;document.getElementById('statTasks').textContent=done+'/'+data.tasks.length;document.getElementById('statTests').textContent=passed+'/'+data.tests.length;
+ document.getElementById('progressList').innerHTML=data.projects.map(p=>'<div class="progress-row"><div class="progress-label"><strong>'+esc(p.name)+'</strong><span>'+p.progress+'%</span></div><div class="bar"><span style="width:'+Math.max(0,Math.min(100,p.progress))+'%"></span></div></div>').join('');
+ document.getElementById('recentRows').innerHTML=data.projects.slice(0,5).map(p=>'<tr><td><strong>'+esc(p.name)+'</strong></td><td>'+esc(p.model)+'</td><td>'+badge(p.status)+'</td><td>'+p.progress+'%</td></tr>').join('')||emptyRow(4,'No projects yet');
+ document.getElementById('activityList').innerHTML=data.activity.slice(0,5).map(a=>'<div class="activity"><span class="dot"></span><div><b>'+esc(a.title)+'</b><p>'+esc(a.detail)+'</p></div></div>').join('');
+ const completed=data.lifecycle.filter(l=>l.done).length;document.getElementById('lifeCount').textContent=completed+' of '+data.lifecycle.length;
+ document.getElementById('lifeMini').innerHTML=data.lifecycle.map((l,i)=>'<div class="progress-row"><div class="progress-label"><span>'+ (l.done?'✓':'○')+' '+esc(l.name)+'</span>'+badge(l.done?'Completed':'Planned')+'</div></div>').join('');
+ renderProjects();renderRequirements();renderTasks();renderTests();renderLifecycle();
+}
+function emptyRow(n,msg){return '<tr><td colspan="'+n+'" class="empty">'+esc(msg)+'</td></tr>'}
+function renderProjects(){const q=(document.getElementById('projectSearch')?.value||'').toLowerCase(),f=document.getElementById('projectFilter')?.value||'';const list=data.projects.filter(p=>(p.name+' '+p.owner+' '+p.model).toLowerCase().includes(q)&&(!f||p.status===f));document.getElementById('projectRows').innerHTML=list.map(p=>'<tr><td><strong>'+esc(p.name)+'</strong><div class="small">'+esc(p.description)+'</div></td><td>'+esc(p.owner)+'</td><td>'+esc(p.model)+'</td><td>'+badge(p.status)+'</td><td>'+p.progress+'%</td><td><button class="btn" data-action="edit-project" data-id="'+p.id+'">Edit</button></td></tr>').join('')||emptyRow(6,'No matching projects.')}
+function renderRequirements(){const q=(document.getElementById('reqSearch')?.value||'').toLowerCase(),f=document.getElementById('reqStatusFilter')?.value||'';const list=data.requirements.filter(r=>(r.id+' '+r.name).toLowerCase().includes(q)&&(!f||r.status===f));document.getElementById('reqRows').innerHTML=list.map(r=>'<tr><td><strong>'+esc(r.id)+'</strong></td><td>'+esc(r.name)+'</td><td>'+badge(r.priority)+'</td><td>'+badge(r.status)+'</td><td><button class="btn" data-action="cycle-req" data-id="'+esc(r.id)+'">Update status</button></td></tr>').join('')||emptyRow(5,'No matching requirements.')}
+function renderTasks(){const cols=[['To Do','To Do'],['In Progress','In Progress'],['Done','Done']];document.getElementById('taskColumns').innerHTML=cols.map(([title,status])=>'<div class="panel"><div class="panel-head"><h2>'+title+'</h2><span class="badge progress">'+data.tasks.filter(t=>t.status===status).length+'</span></div>'+data.tasks.filter(t=>t.status===status).map(t=>'<div class="card" style="padding:14px;margin:10px 0"><b>'+esc(t.name)+'</b><p class="small">'+esc(t.project)+'</p><div style="display:flex;justify-content:space-between;gap:8px;align-items:center">'+badge(t.priority)+'<select class="field" style="max-width:130px;padding:6px;font-size:12px" data-task-status="'+t.id+'" aria-label="Task status"><option '+(status==='To Do'?'selected':'')+'>To Do</option><option '+(status==='In Progress'?'selected':'')+'>In Progress</option><option '+(status==='Done'?'selected':'')+'>Done</option></select></div><div style="text-align:right;margin-top:9px"><button class="btn" data-action="delete-task" data-id="'+t.id+'">Delete</button></div></div>').join('')+'</div>').join('')}
+function renderTests(){document.getElementById('testRows').innerHTML=data.tests.map(t=>'<tr><td><strong>'+esc(t.id)+'</strong></td><td>'+esc(t.req)+'</td><td>'+esc(t.scenario)+'</td><td>'+esc(t.expected)+'</td><td>'+esc(t.actual)+'</td><td>'+badge(t.result)+'</td><td><button class="btn" data-action="cycle-test" data-id="'+esc(t.id)+'">Change result</button></td></tr>').join('')||emptyRow(7,'No test cases yet')}
+function renderLifecycle(){document.getElementById('lifecycleList').innerHTML=data.lifecycle.map((l,i)=>'<div class="progress-row"><div class="progress-label"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" data-life="'+i+'" '+(l.done?'checked':'')+'> <strong>'+esc(l.name)+'</strong></label>'+badge(l.done?'Completed':'Planned')+'</div><div class="small" style="margin-left:25px">'+esc(l.detail)+'</div></div>').join('');const pct=Math.round(data.lifecycle.filter(l=>l.done).length/data.lifecycle.length*100);document.getElementById('lifecyclePercent').textContent=pct+'% complete';document.getElementById('modelSelect').value=data.model;document.getElementById('modelReason').value=data.modelReason}
+function openModal(title,fields,submitText,onSubmit){const host=document.getElementById('modalHost');host.innerHTML='<div style="position:fixed;inset:0;background:#111c3277;display:grid;place-items:center;padding:18px;z-index:10" id="modalBackdrop"><div class="panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="width:min(580px,100%);max-height:90vh;overflow:auto;box-shadow:0 20px 70px #111c3240"><div class="panel-head"><h2 id="modalTitle">'+esc(title)+'</h2><button class="btn" type="button" id="closeModal">✕</button></div><form id="modalForm"><div class="formgrid">'+fields.map(f=>'<div class="formfield '+(f.full?'full':'')+'"><label for="field-'+esc(f.name)+'">'+esc(f.label)+'</label>'+(f.type==='select'?'<select class="field" name="'+esc(f.name)+'" id="field-'+esc(f.name)+'">'+f.options.map(o=>'<option>'+esc(o)+'</option>').join('')+'</select>':f.type==='textarea'?'<textarea class="field" name="'+esc(f.name)+'" id="field-'+esc(f.name)+'" '+(f.required?'required':'')+'>'+esc(f.value||'')+'</textarea>':'<input class="field" type="'+(f.type||'text')+'" name="'+esc(f.name)+'" id="field-'+esc(f.name)+'" value="'+esc(f.value||'')+'" '+(f.required?'required':'')+'>')+'</div>').join('')+'</div><div class="form-actions"><button class="btn" type="button" id="cancelModal">Cancel</button><button class="btn primary" type="submit">'+esc(submitText)+'</button></div></form></div></div>';const close=()=>host.innerHTML='';document.getElementById('closeModal').onclick=close;document.getElementById('cancelModal').onclick=close;document.getElementById('modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')close()});document.getElementById('modalForm').onsubmit=e=>{e.preventDefault();const values=Object.fromEntries(new FormData(e.target).entries());onSubmit(values);close()};document.getElementById(fields[0]?.name?'field-'+fields[0].name:'modalTitle')?.focus()}
+function newProject(existing){openModal(existing?'Edit project':'Create project',[{name:'name',label:'Project name',required:true,value:existing?.name||''},{name:'owner',label:'Owner / team',required:true,value:existing?.owner||'Project Team'},{name:'model',label:'Process model',type:'select',options:['Incremental','Agile','Waterfall','Prototyping','Spiral','V-Model'],value:existing?.model||'Incremental'},{name:'status',label:'Status',type:'select',options:['Planning','In Progress','Completed'],value:existing?.status||'Planning'},{name:'progress',label:'Progress (0–100)',type:'number',required:true,value:String(existing?.progress??0)},{name:'description',label:'Description',type:'textarea',full:true,value:existing?.description||''}],existing?'Save changes':'Create project',v=>{if(existing){Object.assign(existing,{...v,progress:Math.max(0,Math.min(100,Number(v.progress)||0))})}else{data.projects.unshift({id:Date.now(),...v,progress:Math.max(0,Math.min(100,Number(v.progress)||0))})}addActivity(existing?'Project updated':'Project created',v.name);save();render();notify(existing?'Project updated.':'Project created.')})}
+function addRequirement(){openModal('Add requirement',[{name:'id',label:'Requirement ID',required:true},{name:'name',label:'Requirement description',required:true,full:true},{name:'priority',label:'Priority',type:'select',options:['High','Medium','Low']},{name:'status',label:'Status',type:'select',options:['Planned','In Progress','Completed']}],'Add requirement',v=>{if(data.requirements.some(r=>r.id.toLowerCase()===v.id.toLowerCase()))return notify('That requirement ID already exists.');data.requirements.push(v);addActivity('Requirement added',v.id+' · '+v.name);save();render();notify('Requirement added.')})}
+function addTask(){openModal('Add task',[{name:'name',label:'Task name',required:true,full:true},{name:'project',label:'Project',type:'select',options:data.projects.map(p=>p.name)},{name:'status',label:'Status',type:'select',options:['To Do','In Progress','Done']},{name:'priority',label:'Priority',type:'select',options:['High','Medium','Low']}],'Add task',v=>{data.tasks.push({id:Date.now(),...v});addActivity('Task added',v.name);save();render();notify('Task added.')})}
+function addTest(){openModal('Add test case',[{name:'id',label:'Test ID',required:true},{name:'req',label:'Requirement ID',required:true},{name:'scenario',label:'Test scenario',required:true,full:true},{name:'expected',label:'Expected result',required:true},{name:'actual',label:'Actual result',required:true},{name:'result',label:'Result',type:'select',options:['Pending','Pass','Fail']}],'Add test case',v=>{if(data.tests.some(t=>t.id.toLowerCase()===v.id.toLowerCase()))return notify('That test ID already exists.');data.tests.push(v);addActivity('Test case added',v.id);save();render();notify('Test case added.')})}
+document.addEventListener('click',e=>{const navBtn=e.target.closest('[data-view]');if(navBtn){nav(navBtn.dataset.view);return}const go=e.target.closest('[data-go]');if(go){nav(go.dataset.go);return}const action=e.target.closest('[data-action]');if(action){const id=action.dataset.id;if(action.dataset.action==='edit-project'){const p=data.projects.find(p=>String(p.id)===id);if(p)newProject(p)}else if(action.dataset.action==='cycle-req'){const r=data.requirements.find(r=>r.id===id);if(r){r.status=({'Planned':'In Progress','In Progress':'Completed','Completed':'Planned'})[r.status];addActivity('Requirement status updated',r.id+' is '+r.status);save();render()}}else if(action.dataset.action==='delete-task'){data.tasks=data.tasks.filter(t=>String(t.id)!==id);save();render();notify('Task deleted.')}else if(action.dataset.action==='cycle-test'){const t=data.tests.find(t=>t.id===id);if(t){t.result=({'Pending':'Pass','Pass':'Fail','Fail':'Pending'})[t.result];t.actual=t.result==='Pass'?'Test passed':t.result==='Fail'?'Test failed':'Pending manual verification';save();render();notify('Test result changed to '+t.result+'.')}}}});
+document.getElementById('newProjectBtn').onclick=()=>newProject();document.getElementById('newProjectBtn2').onclick=()=>newProject();document.getElementById('addReqBtn').onclick=addRequirement;document.getElementById('addTaskBtn').onclick=addTask;document.getElementById('addTestBtn').onclick=addTest;document.getElementById('projectSearch').addEventListener('input',renderProjects);document.getElementById('projectFilter').addEventListener('change',renderProjects);document.getElementById('reqSearch').addEventListener('input',renderRequirements);document.getElementById('reqStatusFilter').addEventListener('change',renderRequirements);
+document.addEventListener('change',e=>{if(e.target.matches('[data-task-status]')){const t=data.tasks.find(t=>String(t.id)===e.target.dataset.taskStatus);if(t){t.status=e.target.value;addActivity('Task status updated',t.name+' → '+t.status);save();render();notify('Task status updated.')}}if(e.target.matches('[data-life]')){data.lifecycle[Number(e.target.dataset.life)].done=e.target.checked;addActivity('Lifecycle checklist updated',data.lifecycle[Number(e.target.dataset.life)].name+(e.target.checked?' completed':' reopened'));save();render()}})
+document.getElementById('resetLifecycle').onclick=()=>{data.lifecycle.forEach(l=>l.done=false);save();render();notify('Lifecycle checklist reset.')};document.getElementById('saveModel').onclick=()=>{data.model=document.getElementById('modelSelect').value;data.modelReason=document.getElementById('modelReason').value.trim();addActivity('Process model saved',data.model+' selected');save();render();notify('Process model selection saved.')};
+render();
+</script>
+</body>
+</html>
