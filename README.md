@@ -6,7 +6,7 @@ A lightweight, responsive web prototype for tracking software projects across th
 
 Expected GitHub Pages URL: **https://praveenreddy-06.github.io/ase-alm2/**
 
-The site is deployed through the GitHub Actions workflow in `.github/workflows/pages.yml`. The repository owner may need to select **Settings → Pages → Build and deployment → Source → GitHub Actions** once before the first successful deployment. Check the Actions tab for the deployment result.
+The site is deployed through the GitHub Actions workflow in `.github/workflows/pages.yml`. The most recent verified deployment run is available at [GitHub Actions](https://github.com/PraveenReddy-06/ase-alm2/actions/runs/40867734635). Each push to `main` triggers a new static-site deployment; check the Actions tab if a future deployment fails.
 
 ## Features
 
